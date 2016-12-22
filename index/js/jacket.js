@@ -183,6 +183,8 @@ define(function(require, exports, module) {
                  /*写入storage*/
                 var id = $(this).find("span").attr('id');
                 storage.setItem(Index,id+"|"+sessionNum);
+                //添加一行注释
+                //第二行
             }
         })
     }
