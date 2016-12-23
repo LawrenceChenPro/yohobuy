@@ -192,20 +192,27 @@ a {text-decoration: none; color: #000;}
 .good-info .good-detail-text>.price {margin-top: 5px;line-height: 22px;}
 .good-info .tag-container .new-tag {background: #78dc7d;}
 .good-info .tag-container .good-tag {float: left;box-sizing: border-box;display: block;height: 22px;padding: 0 7px;margin-right: 3px;color: #fff;}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*商品划过的显示框*/
+.good-item-wrapper{border: 1px solid #ddd;padding-left: 20px;padding-top: 20px;padding-right: 20px;position: absolute;background: #fff;width:310px;height:440px;display: none;}
+.good-item-wrapper .left{width:235px;margin-top: 22px;}
+.good-item-wrapper .good-detail-img {height: 315px;}
+.good-item-wrapper .good-detail-img {width: 100%;height: 315px;position: relative;}
+.good-item-wrapper .good-detail-img .good-thumb {display: block;overflow: hidden;width: 100%;height: 100%;}
+.good-item-wrapper .good-detail-img .good-thumb img{display: block;overflow: hidden;width: 100%;height: 100%;}
+.good-item-wrapper .good-detail-text {color: #222;font-size: 12px;text-align: left;overflow: hidden;}
+.good-item-wrapper .good-detail-text>a {margin-top: 16px;line-height: 1.5;display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.good-item-wrapper .good-detail-text .brand a {color: #666;line-height: 1.5;display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.good-item-wrapper .good-detail-text>.price {margin-top: 5px;line-height: 22px;}
+.good-item-wrapper .right{float: right;padding-top:25px;width:50px;}
+.good-item-wrapper .right a{display: block;overflow: hidden;width: 100%;height: 100%;}
+.good-item-wrapper .right img{display: block;overflow: hidden;width: 100%;height: 100%;}
+/*分页页脚*/
+.foot-pager {padding: 20px 0;font-size: 12px;color: #6a6a6a;border-top: 1px solid #eaeceb;}
+#Pagination {float: right;font-size:12px;}
+#Pagination a {height: 24px;padding: 0 9px;line-height: 24px;display: inline-block;text-align: center;margin-right: 8px;color: #222;}
+#Pagination .current{color:#fff;background: #222;height:24px;display: inline-block;}
+#Pagination .prev{color:#222;background: #fff;}
+#Pagination span{height: 24px;padding: 0 9px;line-height: 24px;display: inline-block;text-align: center;margin-right: 8px;color: #222;}
 
 
 
