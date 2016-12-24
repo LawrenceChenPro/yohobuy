@@ -301,7 +301,10 @@ define(function(require, exports, module) {
             $("#return-top").fadeOut();
         }
     }
-    
+    new login();
+    function login(){
+        
+    }
     
     
     

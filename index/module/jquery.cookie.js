@@ -59,14 +59,14 @@
  */
 (function(factory){
     if(typeof define === "function"){
-        define("cookie",["jq"],function(){
+        define(function(){
             return factory;
         });
     }else{
         factory(jQuery);
     }
 }(function(jQuery){
-    console.log(jQuery);
+    //console.log(jQuery);
     jQuery.cookie = function (key, value, options) {
 
     // key and value given, set cookie...
