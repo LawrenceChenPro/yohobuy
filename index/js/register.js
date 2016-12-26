@@ -285,7 +285,7 @@ define(function(require, exports, module) {
                             $(".phone-num").css("border-color","red");
                             break;
                         case '1':
-                            $.cookie('user',user);
+                            $.cookie('user',user,{path: "/", expires: 1});
                             $(".register-page ul").hide();
                             $(".Congratulations").show();
                             var num = 4;

@@ -1662,10 +1662,14 @@
     seajs.config({
         alias: {
             "jq" : "./../module/jquery-1.11.3",
-            "page" : "./../module/jquery.pagination"
+            "page" : "./../module/jquery.pagination",
+            "cookie" : "./../module/jquery.cookie"
         }
     });
-    seajs.use(["./js/jacket.js"]);
+    //seajs.use(["./js/jacket.js"]);
+    seajs.use("./js/jacket.js", function(main) {
+        main.init();
+    });
 </script>
 
 </html>

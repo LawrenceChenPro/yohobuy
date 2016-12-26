@@ -3,6 +3,8 @@ define(function(require, exports, module) {
 
   // 通过 require 引入依赖
   var $ = require("jQuery"); 
+    var cookie = require("cookie");
+    cookie($);
     $(function(){
         new topNav();//顶部导航栏
         new wrapNav();//内容区导航
@@ -11,6 +13,7 @@ define(function(require, exports, module) {
         new goodsWrap();//ajax请求
         new feedback();//小调查
         new returnTop();//回到顶部 
+        new login();//检测是否已登录账户
     })
     function topNav(){
         var _this = this;
@@ -301,11 +304,19 @@ define(function(require, exports, module) {
             $("#return-top").fadeOut();
         }
     }
-    new login();
+   
     function login(){
-        
+        var _this = this;
+        var cookie = $.cookie("user");
+        if(cookie){
+             $("#topNavRight li").eq(0).html("Hi~ "+cookie+'<span class="tuichu">[退出]</span>')
+        }
+       $("#topNavRight li").eq(0).on("click",".tuichu",_this.loginyes)
     }
-    
+    login.prototype.loginyes = function(){
+        $.cookie("user",null);
+        $("#topNavRight li").eq(0).html('Hi~[<a href="login.html" class="login">请登录</a>][<a href="register.html" class="register">免费注册</a>]')
+    }
     
     
     

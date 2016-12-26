@@ -6,7 +6,8 @@
      var page = require("page");
      console.log(require("page"))
      page($);
-
+     var cookie = require("cookie");
+     cookie($);
 
      $(function () {
              new topNav(); //顶部导航栏
@@ -16,6 +17,7 @@
              new section(); //商品筛选
              new goodsTap(); //图片详情显示以及切换功能
              new goodsListAjax(40);//列表页的ajax
+             new login();
          })
          //顶部导航栏
      function topNav() {
@@ -353,8 +355,19 @@
          })
      }
 
-
-
+     function login(){
+        var _this = this;
+        var cookie = $.cookie("user");
+        if(cookie){
+             $("#topNavRight li").eq(0).html("Hi~ "+cookie+'<span class="tuichu">[退出]</span>')
+        }
+       $("#topNavRight li").eq(0).on("click",".tuichu",_this.loginyes)
+    }
+    login.prototype.loginyes = function(){
+        $.cookie("user",null);
+        $("#topNavRight li").eq(0).html('Hi~[<a href="login.html" class="login">请登录</a>][<a href="register.html" class="register">免费注册</a>]')
+    }
+    
 
 
 
