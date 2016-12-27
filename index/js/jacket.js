@@ -4,7 +4,7 @@
      // 通过 require 引入依赖
      var $ = require("jq");
      var page = require("page");
-     console.log(require("page"))
+     //console.log(require("page"))
      page($);
      var cookie = require("cookie");
      cookie($);
@@ -248,7 +248,7 @@
          }
          /*商品划伤去会有详情切换*/
          //top:6px;left:-21px;
-
+     var goodsIndex = 0;
      function goodsTap() {
          var _this = this;
          $(".goods-container").on("mouseenter", ".good-info", _this.itemShow)
@@ -261,20 +261,24 @@
          $(".goods-container").on("mouseenter", ".good-item-wrapper .right li", function () {
              var src = $(this).find("img").attr("src");
              $(".good-item-wrapper .good-thumb img").attr("src", src);
+         });
+         /*保存cookie*/
+         $(".good-item-wrapper").on("click",".good-detail-img",function(){
+             //var index = 
+             $.cookie("imgIndex",goodsIndex);
          })
-
      }
      goodsTap.prototype.itemShow = function () {
-         var index = $(this).index();
+         goodsIndex = $(this).index();
          var top = $(this).offset().top;
          var left = $(this).offset().left;
          var src = $(this).find(".good-thumb img").attr("src");
          var text = $(this).find("#t").html();
          var brand = $(this).find(".brand a").html();
          var price = $(this).find(".price").html();
-         var src1 = (index + 1) + "-" + 1;
+         var src1 = (goodsIndex + 1) + "-" + 1;
          //console.log(index)
-         if (index % 3 == 0 && index != 0) {
+         if (goodsIndex % 3 == 0 && goodsIndex != 0) {
              $(".good-item-wrapper").css("left", left - 320);
          } else {
              $(".good-item-wrapper").css("left", left - 257.5);
@@ -330,14 +334,14 @@
                                  html += '<span class="good-tag new-tag">NEW</span>'
                                  html += '</div>'
                                  html += '<div class="good-detail-img">'
-                                 html += '<a href="javascript:;" class="good-thumb">'
+                                 html += '<a href="details.html" class="good-thumb">'
                                  html += '<img src="' + data[i].src + '">'
                                  html += '</a>'
                                  html += '</div>'
                                  html += '<div class="good-detail-text">'
-                                 html += '<a href="javascript:;" id="t">' + data[i].text + '</a>'
+                                 html += '<a href="details.html" id="t">' + data[i].text + '</a>'
                                  html += '<p class="brand">'
-                                 html += '<a href="javascript:;">' + data[i].brand + '</a>'
+                                 html += '<a href="details.html">' + data[i].brand + '</a>'
                                  html += '</p>'
                                  html += '<p class="price">' + data[i].price + '</p>'
                                  html += '</div>'
@@ -352,9 +356,14 @@
              error: function () {
                  alert("请求失败")
              }
-         })
+         });
+         
      }
 
+     
+     
+     
+     //检测是否存在登录
      function login(){
         var _this = this;
         var cookie = $.cookie("user");
