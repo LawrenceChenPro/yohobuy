@@ -151,7 +151,18 @@ img{border:0 none;}
 .product-detail-page .main .small-coupon-list li{float: left;}
 .product-detail-page .main .small-coupon-list .img-red{margin:0 4px;}
 /*商品筛选*/
-.product-detail-page .main .trade-content {padding-top: 20px;margin-top: 20px;border-top: 1px solid #eaeceb;}
+.product-detail-page .main .trade-content {padding-top: 20px;margin-top: 20px;border-top: 1px solid #eaeceb;display: block;}
+.product-detail-page .main .shopCart{padding-top: 20px;margin-top: 20px;border-top: 1px solid #eaeceb;display: none;}
+.shopCart h3{font-size: 20px;color:#000;padding-bottom: 25px;}
+.shopCart .detail{font-size: 14px;padding-bottom: 25px;}
+.shopCart .pay{display: inline-block;margin-right: 10px;height: 48px;line-height: 48px;width: 197px;text-align: center;color: #fff;background: #e92601;font-size: 14px;cursor: pointer;}
+.shopCart .pay .iconfont{font-size: 13px;}
+.shopCart .go-on{border:1px solid #666;display: inline-block;margin-right: 10px;height: 48px;line-height: 48px;width: 130px;text-align: center;cursor: pointer}
+
+
+
+
+
 .product-detail-page .main .chose-color {font-size: 12px;}
 .product-detail-page .main .row {margin-top: 10px;}
 .product-detail-page .main .chose-color .title {margin-top: 14px;}

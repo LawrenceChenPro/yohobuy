@@ -265,7 +265,7 @@
          /*保存cookie*/
          $(".good-item-wrapper").on("click",".good-detail-img",function(){
              //var index = 
-             $.cookie("imgIndex",goodsIndex);
+             $.cookie("imgIndex",goodsIndex,{path: "/", expires: 1});
          })
      }
      goodsTap.prototype.itemShow = function () {
