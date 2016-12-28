@@ -326,7 +326,7 @@ define(function(require, exports, module) {
     function miniCart(){
        var _this = this;
        var cookies = $.cookie("goodsDetails");
-       if(cookies!=""){
+       if(cookies!=""&&cookies!=null){
            $(".goods-num-tip").show(); 
            arr = cookies.split("#");
            arr.pop();
