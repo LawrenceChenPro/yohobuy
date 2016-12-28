@@ -13,6 +13,8 @@ define(function(require, exports, module) {
         new login();
         //显示购物车商品
         new clickArr();
+        //为您精选
+        new choiceForYou();
        
     })
     /*回到顶部*/
@@ -61,7 +63,7 @@ define(function(require, exports, module) {
    function clickArr(){
        var _this = this;
        $(".again").on("click",function(){
-           window.location.href = "details.html"
+           window.location.href = "jacket.html"
        });
        var cookies = $.cookie("goodsDetails");
        if(cookies!=null){
@@ -75,6 +77,8 @@ define(function(require, exports, module) {
        }
        //拼接
        if(arr.length != 0){
+           $(".salesPromotion").show();
+           $(".pre-sell-box").hide();
            var html="";
            for(var i=0;i<arr2.length;i++){
                var price = "¥"+(parseInt(_this.number(arr2[i][4]))/100*arr2[i][3])
@@ -239,6 +243,7 @@ define(function(require, exports, module) {
         arr2.splice(deleteIndex,1);
         clickArr.prototype.changeCookie();
         clickArr.prototype.addPrice();
+        clickArr.prototype.TestingCartNull();
      }
     //批量删除cookie
     clickArr.prototype.delAllShow = function(){
@@ -260,11 +265,109 @@ define(function(require, exports, module) {
         });
         //计算商品总价，进行页面渲染
         clickArr.prototype.addPrice();
+        clickArr.prototype.TestingCartNull();
     }
     //检测是否购物车为空
     clickArr.prototype.TestingCartNull = function(){
-        
+        console.log($(".pay-wapper tbody").find("tr").length)
+        if($(".pay-wapper tbody").find("tr").length == 0){
+            $(".salesPromotion").hide();
+            $(".pre-sell-box").show();
+            $.cookie("goodsDetails",null)
+        } 
     }
+    
+    var choiceNum = 6;
+    var choice = 0;
+    function choiceForYou(){
+        this.goAjax();
+        var _this = this;
+        $(".pagenext,.pageprev").on("click",function(){
+            choiceNum+=6;
+            choice+=6;
+            _this.goAjax();
+        })
+        $(".icon-minus").click(function(){
+            $(".givePoint .main").slideUp(300,function(){
+                $(".icon-minus").addClass("none");
+                $(".icon-add").removeClass("none"); 
+            });
+        })
+        $(".icon-add").click(function(){
+            $(".givePoint .main").slideDown(300,function(){
+                $(".icon-add").addClass("none");
+                $(".icon-minus").removeClass("none"); 
+            });
+        });
+        
+        //进入商品详情页
+        $(".givePoint").on("click",".thumb,.btn_view_s",function(){
+            var goodsIndex = $(this).parent().parent().index()+choice;
+            $.cookie("imgIndex",goodsIndex,{path: "/", expires: 1});
+            window.location.href="details.html"
+        })   
+    }
+    choiceForYou.prototype.goAjax = function(){
+        $.ajax({
+            url:"json/goods-list.json",
+            type:"get",
+            success:function(data){ 
+                var html = "";
+                for(var i = choice;i<choiceNum;i++){
+                    html+='<li>'
+                    html+='<div class="list">'
+                    html+='<div class="thumb">'
+                    html+='<a href="javascript:void(0);">'
+                    html+='<img src="'+data[i].src+'" alt="">'
+                    html+='</a>'
+                    html+='</div>'
+                    html+='<div class="name">'
+                    html+='<a href="javascript:void(0);">'
+                    html+='<h3>'+data[i].text+'</h3>'
+                    html+='</a>'
+                    html+='</div>'
+                    html+='</div>'
+                    html+='<div class="price">'+data[i].price+'</div>'
+                    html+='<div class="op">'
+                    html+='<a href="javascript:void(0);" class="btn_view_s"></a>'
+                    html+='</div>'
+                    html+='</li>'
+                }
+               $(".givePoint ul").html(html)
+            }
+        });
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

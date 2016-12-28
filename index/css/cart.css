@@ -101,7 +101,7 @@ caption, td, th {text-align: left;font-weight: 400;vertical-align: middle;}
 
 .order-ensure-page .pay-wapper .cart-del-btn{height: 22px;line-height: 22px;padding: 0 10px;display: inline-block;cursor: pointer;color: #666;position: relative;border:1px solid #ccc;border-radius: 3px;box-shadow: 0px 0px 5px #eee;}
 
-.order-ensure-page .salesPromotion {width: 990px;height: 36px;border-bottom: 1px solid #ccc; font-size: 12px;}
+.order-ensure-page .salesPromotion {width: 990px;height: 36px;border-bottom: 1px solid #ccc; font-size: 12px;display: none;}
 
 .order-ensure-page .salesPromotion p {width: 800px;height: 36px;line-height: 36px;float: left;padding: 0 10px;}
 
@@ -209,6 +209,97 @@ caption, td, th {text-align: left;font-weight: 400;vertical-align: middle;}
     background-image: url(../images-vans/sprite.cart.png);
     background-position: -221px -225px;
 }
+
+.order-ensure-page .cartnew-goodslist .main {
+    height: 230px;
+    border-top: 1px solid #e3e3e3;
+    display: block;
+}
+.order-ensure-page .cartnew-goodslist .main ul {
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+}
+.order-ensure-page .cartnew-goodslist .main li {
+    width: 16.6667%;
+    box-sizing: border-box;
+    height: 230px;
+    border-right: 1px solid #e3e3e3;
+    float: left;
+}
+.order-ensure-page .cartnew-goodslist .main .list {
+    width: 102px;
+    padding: 10px 0 0;
+    margin: 0 auto;
+}
+.order-ensure-page .cartnew-goodslist .main .thumb {
+    height: 110px;
+}
+.order-ensure-page .cartnew-goodslist .main .thumb img {
+    display: block;
+    margin: 0 auto;
+    height:110px;
+    width:auto;
+}
+.order-ensure-page .cartnew-goodslist .main .name {
+    height: 35px;
+    overflow: hidden;
+    font-size: 12px;
+}
+.order-ensure-page .cartnew-goodslist .main .name a {
+    color: #333;
+    text-decoration: underline;
+}
+.order-ensure-page .cartnew-goodslist .main .name h3 {
+    height: 30px;
+    line-height: 15px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #333;
+    cursor: pointer;
+    overflow: hidden;
+}
+.order-ensure-page .cartnew-goodslist .main .price {
+    color: #333;
+    height: 25px;
+    line-height: 25px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    font-size: 12px;
+}
+.order-ensure-page .cartnew-goodslist .main .op {
+    text-align: center;
+    padding: 0 0 5px;
+}
+.order-ensure-page .cartnew-goodslist .main .btn_view_s {
+    width: 100px;
+    height: 22px;
+    background-image: url(../images-vans/sprite.cart.png);
+    background-position: 0 -248px;
+    display: inline-block;
+    border: 0;
+}
+.order-ensure-page .pay-wapper .pre-sell-box .cart-empty {
+    border: none;
+    padding: 100px 0 100px 260px;
+    background: url(../images-vans/cart_empty.gif) 200px 56px no-repeat;
+}
+.order-pay table {
+    width: 100%;
+}
+.order-ensure-page .pay-wapper .pre-sell-box .cart-empty a {
+    display: inline-block;
+    width: 90px;
+    height: 35px;
+    background-image: url(../images-vans/sprite.cart.png);
+    background-position: -237px -141px;
+    overflow: hidden;
+    color: #666;
+    line-height: 32px;
+}
+
 
 
 

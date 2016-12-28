@@ -16,8 +16,9 @@
              new menu(); //三级菜单
              new section(); //商品筛选
              new goodsTap(); //图片详情显示以及切换功能
-             new goodsListAjax(40);//列表页的ajax
+             new goodsListAjax(40); //列表页的ajax
              new login();
+             new miniCart(); //mini购物车
          })
          //顶部导航栏
      function topNav() {
@@ -211,7 +212,7 @@
          }
          /*切换选择*/
      section.prototype.typeClick = function () {
-         window.location.reload();
+             window.location.reload();
              sessionNum++;
              storage.setItem("number", sessionNum);
              $(".sort-type").removeClass("active");
@@ -249,6 +250,7 @@
          /*商品划伤去会有详情切换*/
          //top:6px;left:-21px;
      var goodsIndex = 0;
+
      function goodsTap() {
          var _this = this;
          $(".goods-container").on("mouseenter", ".good-info", _this.itemShow)
@@ -263,9 +265,12 @@
              $(".good-item-wrapper .good-thumb img").attr("src", src);
          });
          /*保存cookie*/
-         $(".good-item-wrapper").on("click",".good-detail-img",function(){
+         $(".good-item-wrapper").on("click", ".good-detail-img", function () {
              //var index = 
-             $.cookie("imgIndex",goodsIndex,{path: "/", expires: 1});
+             $.cookie("imgIndex", goodsIndex, {
+                 path: "/",
+                 expires: 1
+             });
          })
      }
      goodsTap.prototype.itemShow = function () {
@@ -298,7 +303,7 @@
 
 
      /*列表页的ajax切入*/
-     
+
 
      function goodsListAjax(num) {
          $.ajax({
@@ -311,7 +316,7 @@
                  var showNum = num;
                  var dataL = data.length;
                  var pageNum = Math.ceil(dataL / showNum);
-                
+
 
                  $('#Pagination').pagination(pageNum, {
                      num_edge_entries: 3, //边缘页数
@@ -321,10 +326,10 @@
                      next_text: "下一页",
                      callback: function (index) {
                          var Ihtml = $('#Pagination').find(".current").html();
-                         if(Ihtml == "上一页") Ihtml = 1;
+                         if (Ihtml == "上一页") Ihtml = 1;
                          //console.log(Ihtml)
-                         
-                        $(".page-orient .span").html('<i>'+ Ihtml +'</i>/'+pageNum)
+
+                         $(".page-orient .span").html('<i>' + Ihtml + '</i>/' + pageNum)
                          var html = "";
                          for (var i = showNum * index; i < showNum * index + showNum; i++) {
                              //console.log(dataL)
@@ -357,26 +362,112 @@
                  alert("请求失败")
              }
          });
-         
+
      }
 
-     
-     
-     
+
+
+
      //检测是否存在登录
-     function login(){
-        var _this = this;
-        var cookie = $.cookie("user");
-        if(cookie){
-             $("#topNavRight li").eq(0).html("Hi~ "+cookie+'<span class="tuichu">[退出]</span>')
-        }
-       $("#topNavRight li").eq(0).on("click",".tuichu",_this.loginyes)
-    }
-    login.prototype.loginyes = function(){
-        $.cookie("user",null);
-        $("#topNavRight li").eq(0).html('Hi~[<a href="login.html" class="login">请登录</a>][<a href="register.html" class="register">免费注册</a>]')
-    }
-    
+     function login() {
+         var _this = this;
+         var cookie = $.cookie("user");
+         if (cookie) {
+             $("#topNavRight li").eq(0).html("Hi~ " + cookie + '<span class="tuichu">[退出]</span>')
+         }
+         $("#topNavRight li").eq(0).on("click", ".tuichu", _this.loginyes)
+     }
+     login.prototype.loginyes = function () {
+         $.cookie("user", null);
+         $("#topNavRight li").eq(0).html('Hi~[<a href="login.html" class="login">请登录</a>][<a href="register.html" class="register">免费注册</a>]')
+     }
+     //mini购物车
+     var arr = [];
+     var arr2 = [];
+     var goodsNum = 0;
+
+     function miniCart() {
+         var _this = this;
+         var cookies = $.cookie("goodsDetails");
+         if (cookies != "") {
+             $(".goods-num-tip").show();
+             arr = cookies.split("#");
+             arr.pop();
+             //获取每段商品的全部信息；
+             for (var j = 0; j < arr.length; j++) {
+                 var a = arr[j].split("|");
+                 arr2.push(a);
+             }
+             var html = "";
+             for (var i = 0; i < arr2.length; i++) {
+                 goodsNum += parseInt(arr2[i][3]);
+                 html += '<div class="goods-item">'
+                 html += '<div class="goods-img">'
+                 html += '<a href="javascript:;">'
+                 html += '<img src="' + arr2[i][1] + '" alt="">'
+                 html += '</a>'
+                 html += '</div>'
+                 html += '<div class="goods-info">'
+                 html += '<p class="title">' + arr2[i][0] + '</p>'
+                 html += '<p>尺码：<span class="size">' + arr2[i][2] + '</span></p>'
+                 html += '</div>'
+                 html += '<div class="goods-price">'
+                 html += '<p>'
+                 html += '<span class="price">' + arr2[i][4] + '</span> x <span class="num">' + arr2[i][3] + '</span>'
+                 html += '</p>'
+                 html += '<p>'
+                 html += '<span id="delete"><a href="javascript:;" style="color:#000;padding:2px 4px;background:#eee;">删除</a></span>'
+                 html += '</p>'
+                 html += '</div>'
+                 html += '</div>'
+             }
+             $(".goods-num-tip").html(goodsNum);
+             $("#goods-item").html(html);
+             console.log(arr2);
+
+             $(".go-cart").on("click", "#delete", _this.delete);
+         } else {
+             $(".goods-num-tip").hide();
+             $(".rich-cart").hide();
+             $(".cart-null").show();
+         }
+         $(".go-cart").on("mouseenter", function () {
+             $(".mini-cart-wrapper").show();
+         }).on("mouseleave", function () {
+             $(".mini-cart-wrapper").hide();
+         })
+     }
+     miniCart.prototype.delete = function () {
+         $(this).parent().parent().parent().remove();
+         miniCart.prototype.TestingCartNull();
+         var Index = $(this).parent().parent().parent().index();
+         arr2.splice(Index, 1);
+         miniCart.prototype.changeCookie();
+         goodsNum = 0;
+         for (var i = 0; i < arr2.length; i++) {
+             goodsNum += parseInt(arr2[i][3]);
+         }
+         $(".goods-num-tip").html(goodsNum);
+     }
+     miniCart.prototype.TestingCartNull = function () {
+         console.log($(".go-cart").find(".goods-item").length)
+         if ($(".go-cart").find(".goods-item").length == 0) {
+             $(".rich-cart").hide();
+             $(".cart-null").show();
+             $(".goods-num-tip").hide();
+         }
+     }
+     miniCart.prototype.changeCookie = function () {
+         var strCookie = "";
+         for (var i = 0; i < arr2.length; i++) {
+             strCookie += arr2[i].join("|");
+             strCookie += "#";
+         }
+         $.cookie("goodsDetails", strCookie, {
+             path: "/",
+             expries: 1
+         });
+     }
 
 
 
