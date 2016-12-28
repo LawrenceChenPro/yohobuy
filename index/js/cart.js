@@ -40,6 +40,7 @@ define(function(require, exports, module) {
             $("#return-top").fadeOut();
         }
     }
+    //检测是否为登录状态
    function login(){
         var _this = this;
         var cookie = $.cookie("user");
@@ -53,9 +54,10 @@ define(function(require, exports, module) {
         $(".header-tool li").eq(0).html('Hi~[<a href="login.html" class="login">请登录</a>][<a href="register.html" class="register">免费注册</a>]')
     }
     
-    
-    
-   
+    // 商品信息
+    var arr=[];
+    var arr2=[];
+    var deleteIndex;
    function clickArr(){
        var _this = this;
        $(".again").on("click",function(){
@@ -63,19 +65,14 @@ define(function(require, exports, module) {
        });
        var cookies = $.cookie("goodsDetails");
        if(cookies!=null){
-           var arr = cookies.split("#");
+           arr = cookies.split("#");
            arr.pop();
            //获取每段商品的全部信息；
-           var arr2=[];
            for(var j = 0;j<arr.length;j++){
                var a = arr[j].split("|");
                arr2.push(a);
            }
-       }else{
-           var arr = [];
-           var arr2=[];
        }
-       
        //拼接
        if(arr.length != 0){
            var html="";
@@ -129,35 +126,67 @@ define(function(require, exports, module) {
        $("#tipsbox a").click(function(){
            $(this).parent().hide(300);
        })
+        //删除商品
+       $(".cart-del-btn").on("click",_this.delGoodsShow);
+       $(".yoho-dialog").on("click",".close,#cancel",function(){
+            $(".yoho-dialog").hide();
+            $("#wrap").hide();
+       });
+       $(".yoho-dialog").on("click","#sure",_this.delGoodsSure);
+       //批量删除cookie
+       $(".delAll").on("click",_this.delAllShow)
+       $(".yoho-dialog2").on("click",".close,#cancel",function(){
+            $(".yoho-dialog2").hide();
+            $("#wrap").hide();
+       });
+       $(".yoho-dialog2").on("click","#sure",_this.delAllSure);
        
        
-       
-       
-   }
-   clickArr.prototype.minusClick = function(){
+}
+    //改变cookie的封装方法
+    clickArr.prototype.changeCookie = function(){
+        var strCookie = "";
+        for(var i = 0;i<arr2.length;i++){
+          strCookie+=arr2[i].join("|");
+            strCookie+="#";
+        }
+        $.cookie("goodsDetails",strCookie,{path:"/",expries:1});
+    }
+
+    /*商品数量的加减*/
+    clickArr.prototype.minusClick = function(){
        var _this = this;
        var sib = $(this).parent().find("input").val();
-           var goodsNum = parseInt(sib);
-           var pri = $(this).parent().parent().find(".productPrice").html();
-           if(goodsNum>1){
-               goodsNum--;
-               var price = "¥"+(parseInt( clickArr.prototype.number(pri)/100*goodsNum))
-               $(this).parent().find("input").val(goodsNum);
-               $(this).parent().parent().find(".sub-total").html(price);
-               clickArr.prototype.addPrice();
-           }
-   }
+       var goodsNum = parseInt(sib);
+       var pri = $(this).parent().parent().find(".productPrice").html();
+       var index = $(this).parent().parent().index();
+       if(goodsNum>1){
+           goodsNum--;
+           var price = "¥"+(parseInt( clickArr.prototype.number(pri)/100*goodsNum))
+           $(this).parent().find("input").val(goodsNum);
+           $(this).parent().parent().find(".sub-total").html(price);
+           clickArr.prototype.addPrice();
+           //存储cookie
+           arr2[index].splice(3,1,goodsNum);
+           clickArr.prototype.changeCookie();   
+       }    
+    }
      clickArr.prototype.plusClick = function(){
-          var _this = this;
-          var sib = $(this).parent().find("input").val();
+            var _this = this;
+            var sib = $(this).parent().find("input").val();
+            var index = $(this).parent().parent().index();
             var goodsNum = parseInt(sib);
             var pri = $(this).parent().parent().find(".productPrice").html();
             goodsNum++;
-           var price = "¥"+(parseInt( clickArr.prototype.number(pri)/100*goodsNum))
+            var price = "¥"+(parseInt( clickArr.prototype.number(pri)/100*goodsNum))
             $(this).parent().find("input").val(goodsNum);
-           $(this).parent().parent().find(".sub-total").html(price);
-           clickArr.prototype.addPrice();
+            $(this).parent().parent().find(".sub-total").html(price);
+            clickArr.prototype.addPrice();
+            //存储cookie
+               arr2[index].splice(3,1,goodsNum);
+            clickArr.prototype.changeCookie();   
      }
+     /*选中单个商品*/
     clickArr.prototype.checkChange = function(){
         var _this = this;
         if(!$(this).prop("checked")){
@@ -167,8 +196,8 @@ define(function(require, exports, module) {
            }
             clickArr.prototype.addPrice();
     }
-    
-   clickArr.prototype.allSchange = function(){
+    /*选中所有商品*/
+    clickArr.prototype.allSchange = function(){
         if(!$(this).prop("checked")){
             $(this).prop("checked", false);
             $(".cart-item-check").prop("checked", false);
@@ -196,13 +225,46 @@ define(function(require, exports, module) {
            })
            $(".cartnew-sum strong").html("¥"+allPrice+".00")
      }
-    
-    
-    
-    
-    
-    
-    
+    //删除商品
+     clickArr.prototype.delGoodsShow = function(){
+        $(".yoho-dialog").show();
+        $("#wrap").show();
+        $("#wrap").css({"width":$("body").css("width"),"height":$("body").css("height")});
+        deleteIndex = $(this).parent().parent().index(); 
+     }
+     clickArr.prototype.delGoodsSure = function(){
+        $(".yoho-dialog").hide();
+        $("#wrap").hide();
+        $(".pay-wapper tbody tr").eq(deleteIndex).remove();
+        arr2.splice(deleteIndex,1);
+        clickArr.prototype.changeCookie();
+        clickArr.prototype.addPrice();
+     }
+    //批量删除cookie
+    clickArr.prototype.delAllShow = function(){
+        $(".yoho-dialog2").show();
+        $("#wrap").show();
+        $("#wrap").css({"width":$("body").css("width"),"height":$("body").css("height")});
+    }
+    clickArr.prototype.delAllSure = function(){
+        $(".yoho-dialog2").hide();
+        $("#wrap").hide();
+        $(".cart-item-check").each(function(){
+           console.log($(this).prop("checked"))
+           if($(this).prop("checked")){
+               $(this).parent().parent().parent().remove();
+               var allSelectIndex =  $(this).parent().parent().parent().index();
+                arr2.splice(allSelectIndex,1);
+               clickArr.prototype.changeCookie();
+           } 
+        });
+        //计算商品总价，进行页面渲染
+        clickArr.prototype.addPrice();
+    }
+    //检测是否购物车为空
+    clickArr.prototype.TestingCartNull = function(){
+        
+    }
     
     
     

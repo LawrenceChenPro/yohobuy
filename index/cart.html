@@ -86,11 +86,11 @@
                       <div class="left batch_div">
                           <input type="checkbox" checked="checked" id="allS">
                           <span>全选</span>
-                          <a href="delAll" class="">批量删除</a>
+                          <a href="javascript:;" class="delAll">批量删除</a>
                       </div>
                       <div class="right">
                           <p>
-                              商品总价（不含运费）:<strong> ¥1697.42 </strong> 元
+                              商品总价（不含运费）:<strong> ¥0000 </strong> 元
                           </p>
                       </div>
                   </div>
@@ -104,7 +104,61 @@
                   </div>
               </div>
           </div>
+          <!--商品推荐-->
+          <div class="histroy givePoint">
+              <div class="cartnew-goodslist cartnew-goodslist-open">
+                  <div class="title">
+                      <h2>
+                          <i class="icon-minus"></i>
+                          <i class="icon-add none"></i>
+                          为您优选
+                      </h2>
+                      <div class="right">
+                          <span class="pageprev btn_type1">
+                              <a href="javascript:;" title="上一页">
+                                  <span></span>
+                              </a>
+                          </span>
+                          <span class="pagenext btn_type1">
+                              <a href="javascript:;" title="下一页">
+                                  <span></span>
+                              </a>
+                          </span>
+                      </div>
+                  </div>
+                  <div class="main">
+                      <ul>
+                          <li>
+                              <div class="list">
+                                  <div class="thumb">
+                                      <a href="javascript:;">
+                                          <img src="images-jacket/1-1.jpg" alt="">
+                                      </a>
+                                  </div>
+                              </div>
+                              <div class="name">
+                                  <a href="javascript:;">
+                                      <h3>【阿信亲身演绎】STAYREAL X 海绵宝宝 小伙伴海绵TEE</h3>
+                                  </a>
+                              </div>
+                              <div class="price">¥359.00</div>
+                              <div class="op">
+                                  <a href="javascript:;"></a>
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
       </div>
+      
+      
+      
+      
+      
+      
+      <!--是否删除商品-->
+      <div id="wrap" style="background:#000;opacity:0.5;position:absolute;top:0;left:0"></div>
       <div class="yoho-dialog confirm-dialog">
           <span class="close">
               <i>×</i>
@@ -120,18 +174,22 @@
               <span class="btn confirm-cancel" id="cancel">取消</span>
           </div>
       </div>
-  
-  
-  
-
-
-
-
-
-
-
-
-
+      <div class="yoho-dialog2 confirm-dialog2">
+          <span class="close">
+              <i>×</i>
+          </span>
+          <div class="content">
+              <div class="remove">
+                  <span></span>&nbsp;&nbsp;删除商品
+              </div>
+              <p>您确定要删除全部商品吗？</p>
+          </div>
+          <div class="btns">
+              <span class="btn confirm-sure" id="sure">确定</span>
+              <span class="btn confirm-cancel" id="cancel">取消</span>
+          </div>
+      </div>
+ 
     <!--底部-->
     <footer class="yoho-footer">
         <div class="footerbottom">

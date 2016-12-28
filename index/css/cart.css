@@ -122,6 +122,9 @@ caption, td, th {text-align: left;font-weight: 400;vertical-align: middle;}
 .order-ensure-page .cartnew-submit .again{background: #eee;box-shadow: 0 0 3px #666;float: left;border:1px solid #ccc;}
 .order-ensure-page .cartnew-submit .pay{background: #e8044f;color:#fff; box-shadow: 0 0 3px #d60248;border:1px solid red;float: right;}
 
+
+
+/*第一个提示*/
 .yoho-dialog {position: fixed;padding: 20px;height: 178px;width: 350px;background: #f8f8f8;z-index: 12;border: 5px solid rgba(0,0,0,.38);top:0;left:0;right:0;bottom:0;margin:auto;display: none;}
 .yoho-dialog .close {position: absolute;top: 5px;right: 12px;cursor: pointer;font-size: 25px;}
 
@@ -135,6 +138,87 @@ caption, td, th {text-align: left;font-weight: 400;vertical-align: middle;}
 .yoho-dialog .btns .confirm-sure,.yoho-dialog .btns .confirm-cancel{display: inline-block;width: 56px;height: 26px;line-height: 26px;text-align: center;border: 1px solid #000;cursor: pointer;margin-left: 30px;}
 .yoho-dialog .btns{margin-left: 64px;}
 .yoho-dialog .btns .confirm-sure{background: #000;color:#fff;}
+/*第二个提示*/
+.yoho-dialog2 {position: fixed;padding: 20px;height: 178px;width: 350px;background: #f8f8f8;z-index: 12;border: 5px solid rgba(0,0,0,.38);top:0;left:0;right:0;bottom:0;margin:auto;display: none;}
+.yoho-dialog2 .close {position: absolute;top: 5px;right: 12px;cursor: pointer;font-size: 25px;}
+
+.yoho-dialog2 .content {width: 350px;height: auto; min-height: 90px; overflow: hidden;line-height: 20px;position: relative;padding-top: 40px;padding-bottom: 20px;}
+
+.yoho-dialog2 .content div {position: absolute;top: 0;left: 100px;padding-top: 30px;font-size: 22px;font-weight: 700;width: 150px;height: 30px;line-height: 30px;margin: 0 auto;}
+
+.yoho-dialog2 .content p {position: absolute;left: 0;top: 55px;width: 100%;color: #444;line-height: 25px;font-size: 16px;text-align: center;margin-top: 25px;}
+.yoho-dialog2 .btns .confirm-sure,.yoho-dialog2 .btns .confirm-cancel{display: inline-block;width: 56px;height: 26px;line-height: 26px;text-align: center;border: 1px solid #000;cursor: pointer;margin-left: 30px;}
+.yoho-dialog2 .btns{margin-left: 64px;}
+.yoho-dialog2 .btns .confirm-sure{background: #000;color:#fff;}
+/*为您优选*/
+.order-ensure-page .cartnew-goodslist {
+    margin-bottom: 10px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+}
+.order-ensure-page .cartnew-goodslist .title {
+    height: 20px;
+    padding: 8px 10px;
+    background: #efefef;
+}
+.order-ensure-page .cartnew-goodslist .title h2 {
+    height: 20px;
+    line-height: 24px;
+    overflow: hidden;
+    font-size: 12px;
+    float: left;
+    cursor: pointer;
+}
+.order-ensure-page .cartnew-goodslist .title h2 .icon-minus {
+    background-image: url(../images-vans/sprite.cart.png);
+    background-position: -323px -225px;
+}
+.order-ensure-page .cartnew-goodslist .title h2 .icon-add {
+    background-image: url(../images-vans/sprite.cart.png);
+    background-position: -339px -225px;
+}
+.order-ensure-page .cartnew-goodslist .title h2 i {
+    width: 15px;
+    height: 15px;
+    float: left;
+    position: relative;
+    top: 4px;
+    margin-right: 5px;
+}
+.order-ensure-page .none {
+    display: none;
+}
+.order-ensure-page .cartnew-goodslist .right {
+    float: right;
+}
+.order-ensure-page .cartnew-goodslist .right .pageprev {
+    background-image: url(../images-vans/sprite.cart.png);
+    background-position: -191px -225px;
+}
+.order-ensure-page .cartnew-goodslist .right span {
+    width: 28px;
+    height: 22px;
+    display: inline-block;
+}
+.order-ensure-page .cartnew-goodslist .right span {
+    width: 28px;
+    height: 22px;
+    display: inline-block;
+}
+.order-ensure-page .cartnew-goodslist .right .pagenext {
+    background-image: url(../images-vans/sprite.cart.png);
+    background-position: -221px -225px;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
