@@ -323,9 +323,7 @@
                  })
                  //渲染mini购物车
                  var arrNew = [title,size];
-                 
                  $(".goods-num-tip").show();
-                 
                  $(".rich-cart").show();
                  $(".cart-null").hide();
                  //购物车查重
@@ -384,7 +382,7 @@
                      html += '<span class="price">' + Arr2[i][4] + '</span> x <span class="num">' + Arr2[i][3] + '</span>'
                      html += '</p>'
                      html += '<p>'
-                     html += '<span id="delete"><a href="javascript:;" style="color:#000;padding:2px 4px;background:#eee;">删除</a></span>'
+                     html += '<span class="delete-goods"><a href="javascript:;" style="color:#000;padding:2px 4px;background:#eee;">删除</a></span>'
                      html += '</p>'
                      html += '</div>'
                      html += '</div>'
@@ -393,7 +391,7 @@
                  $("#goods-item").html(html);
                  $(".goods-num-tip").html(goodsNum);
                  $(".shopCart .detail span").html(goodsNum)
-
+                 $(".go-cart").on("click", ".delete-goods",miniCart.prototype.delete);
              }
          });
          $(".go-on").on("click", function () {
