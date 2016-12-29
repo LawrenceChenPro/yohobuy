@@ -378,7 +378,7 @@
          $("#topNavRight li").eq(0).on("click", ".tuichu", _this.loginyes)
      }
      login.prototype.loginyes = function () {
-         $.cookie("user", null);
+         $.cookie("user", null,{path:"/",expries:1});
          $("#topNavRight li").eq(0).html('Hi~[<a href="login.html" class="login">请登录</a>][<a href="register.html" class="register">免费注册</a>]')
      }
      //mini购物车

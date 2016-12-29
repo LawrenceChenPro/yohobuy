@@ -15,7 +15,8 @@ define(function(require, exports, module) {
         new clickArr();
         //为您精选
         new choiceForYou();
-       
+        //结算检测
+        new testLogin();
     })
     /*回到顶部*/
     function returnTop(){
@@ -52,7 +53,7 @@ define(function(require, exports, module) {
        $(".header-tool li").eq(0).on("click",".tuichu",_this.loginyes)
     }
     login.prototype.loginyes = function(){
-        $.cookie("user",null);
+        $.cookie("user",null,{path: "/", expires: 1});
         $(".header-tool li").eq(0).html('Hi~[<a href="login.html" class="login">请登录</a>][<a href="register.html" class="register">免费注册</a>]')
     }
     
@@ -273,10 +274,10 @@ define(function(require, exports, module) {
         if($(".pay-wapper tbody").find("tr").length == 0){
             $(".salesPromotion").hide();
             $(".pre-sell-box").show();
-            $.cookie("goodsDetails",null)
+            $.cookie("goodsDetails",null,{path:"/",expries:1})
         } 
     }
-    
+    /*为您精选*/
     var choiceNum = 6;
     var choice = 0;
     function choiceForYou(){
@@ -337,8 +338,14 @@ define(function(require, exports, module) {
             }
         });
     }
-    
-    
+    function testLogin(){
+        $("#payDiv .pay").click(function(){
+            var user = $.cookie("user");
+            if(user == null){
+                window.location.href = "login.html"
+            }
+        })
+    }
     
     
     

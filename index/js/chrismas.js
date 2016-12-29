@@ -120,7 +120,7 @@ define(function(require, exports, module) {
     $.each($("area"),function(i,val){
 　　　　$(val).attr({"onfocus":"blur(this)"});
 　　})
-    
+    /*检测是否为登录状态*/
     function login(){
         var _this = this;
         var cookie = $.cookie("user");
@@ -129,8 +129,9 @@ define(function(require, exports, module) {
         }
        $("#topNavRight li").eq(0).on("click",".tuichu",_this.loginyes)
     }
+    //退出
     login.prototype.loginyes = function(){
-        $.cookie("user",null);
+        $.cookie("user", null,{path:"/",expries:1});
         $("#topNavRight li").eq(0).html('Hi~[<a href="login.html" class="login">请登录</a>][<a href="register.html" class="register">免费注册</a>]')
     }
     

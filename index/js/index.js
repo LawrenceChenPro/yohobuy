@@ -170,6 +170,7 @@ define(function(require, exports, module) {
     }
     var num1 = 16;
     var index = 0;
+    var flag = true;
     preferance.prototype.switchLogo = function(){
         $.ajax({
             url:"json/logo.json",
@@ -192,8 +193,47 @@ define(function(require, exports, module) {
             }
         })
     }
-    
+    /*商品列表加载*/
     function goodsWrap(){
+        var _this = this;
+        $(document).scroll(_this.loadAjax);
+        $(".loading a").on("click",_this.loading);    
+    
+    };
+    goodsWrap.prototype.loadAjax = function(){
+        var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+        console.log(scrollTop)
+        if(scrollTop >= 6000&&flag == true){
+            $.ajax({
+                url:"json/goods-wrap.json",
+                type:"get",
+                success:function(data){
+                    var html = "";
+                    for(var i = 0;i<Math.ceil(data.length/2);i++){
+                        html+='<div class="good-info">'
+                        html+='<div class="tag-container clearfix"></div>'
+                        html+='<div class="good-detail-img">'
+                        html+='<a href="javascript:;" class="good-thumb"><img src='+data[i].src+' alt=""></a>'
+                        html+='</div>'
+                        html+='<div class="good-detail-text">'
+                        html+='<a href="javascript:;">'+data[i].text+'</a>'
+                        html+='<p class="price">'
+                        html+='<span>'+data[i].price+'</span>'
+                        html+='</p>'
+                        html+='</div>'
+                        html+='</div>'
+                    }
+                    $(".goods-container").html(html);
+                    flag = false;
+                },
+                error:function(){
+                    alert("请求失败")
+                }    
+            })
+        }
+    }
+    //加载更多
+    goodsWrap.prototype.loading = function(){
         $.ajax({
             url:"json/goods-wrap.json",
             type:"get",
@@ -219,7 +259,16 @@ define(function(require, exports, module) {
                 alert("请求失败")
             }    
         })
-    };
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //意见反馈卡
     var NMU = 0,NUM2 = 0,NUM3 = false;
     function feedback(){
@@ -315,7 +364,7 @@ define(function(require, exports, module) {
        $("#topNavRight li").eq(0).on("click",".tuichu",_this.loginyes)
     }
     login.prototype.loginyes = function(){
-        $.cookie("user",null);
+        $.cookie("user",null,{path:"/",expries:1});
         $("#topNavRight li").eq(0).html('Hi~[<a href="login.html" class="login">请登录</a>][<a href="register.html" class="register">免费注册</a>]')
     }
     

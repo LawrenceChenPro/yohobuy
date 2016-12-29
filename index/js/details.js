@@ -215,7 +215,7 @@
                  }
              })
          }
-         /*优惠券*/
+    /*优惠券*/
      detailTab.prototype.youhuiHide = function () {
          $(".coupon-big").hide();
          $("#bodyWrap").hide();
@@ -234,9 +234,9 @@
              })
              $(".coupon-big").show();
          }
-         /*数量加减*/
+         
      var selectNum = 0;
-
+     /*数量加减*/    
      function selectGoods() {
          var _this = this;
          $(".size-wrapper .select").on("click", _this.selected)
@@ -296,11 +296,11 @@
                  $(".minus-plus i").eq(0).css("color", "#333");
              }
          }
-         /*添加购物车*/
+         
 
      var sizeIndex;
      var cookies = $.cookie("goodsDetails") == null ? "" : $.cookie("goodsDetails");
-
+     /*添加购物车*/
      function shopCart() {
          //console.log(arr2)
          $("#add-to-cart").on("click", function () {
@@ -392,12 +392,12 @@
 
                  $("#goods-item").html(html);
                  $(".goods-num-tip").html(goodsNum);
+                 $(".shopCart .detail span").html(goodsNum)
 
              }
          });
          $(".go-on").on("click", function () {
-             $(".trade-content").slideDown();
-             $(".shopCart").slideUp();
+             window.location.reload();
          })
          $(".size-wrapper .select").click(function () {
              $(".size-warn").hide();
@@ -414,6 +414,7 @@
      function miniCart() {
          var _this = this;
          var cookies = $.cookie("goodsDetails");
+         
          if (cookies != "" && cookies != null) {
              $(".goods-num-tip").show();
              arr = cookies.split("#");
@@ -441,27 +442,26 @@
                  html += '<span class="price">' + arr2[i][4] + '</span> x <span class="num">' + arr2[i][3] + '</span>'
                  html += '</p>'
                  html += '<p>'
-                 html += '<span id="delete"><a href="javascript:;" style="color:#000;padding:2px 4px;background:#eee;">删除</a></span>'
+                 html += '<span class="delete-goods"><a href="javascript:;" style="color:#000;padding:2px 4px;background:#eee;">删除</a></span>'
                  html += '</p>'
                  html += '</div>'
                  html += '</div>'
              }
              $(".goods-num-tip").html(goodsNum);
              $("#goods-item").html(html);
-             //console.log(arr2);
-
-             $(".go-cart").on("click", "#delete", _this.delete);
          } else {
              $(".goods-num-tip").hide();
              $(".rich-cart").hide();
              $(".cart-null").show();
          }
+         $(".go-cart").on("click", ".delete-goods", _this.delete);
          $(".go-cart").on("mouseenter", function () {
              $(".mini-cart-wrapper").show();
          }).on("mouseleave", function () {
              $(".mini-cart-wrapper").hide();
          })
      }
+     //删除单个商品
      miniCart.prototype.delete = function () {
          $(this).parent().parent().parent().remove();
          miniCart.prototype.TestingCartNull();
@@ -473,13 +473,16 @@
              goodsNum += parseInt(arr2[i][3]);
          }
          $(".goods-num-tip").html(goodsNum);
+         window.location.reload();
      }
+     //检测是否为空
      miniCart.prototype.TestingCartNull = function () {
          console.log($(".go-cart").find(".goods-item").length)
          if ($(".go-cart").find(".goods-item").length == 0) {
              $(".rich-cart").hide();
              $(".cart-null").show();
              $(".goods-num-tip").hide();
+             $.cookie("goodsDetails",null,{path:"/",expries:1})
          }
      }
      miniCart.prototype.changeCookie = function () {
